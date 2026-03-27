@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded", onLoaded);
 
 async function onLoaded() {
-    const tokenInput = document.getElementById("token");
+    const tokenInput = document.getElementById("token") as HTMLInputElement;
     const toggleBtn = document.getElementById("toggleVisibility");
     const saveBtn = document.getElementById("save");
     const clearBtn = document.getElementById("clear");
