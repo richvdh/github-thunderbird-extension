@@ -1,0 +1,174 @@
+/* GitHub Review Context – Options page styles */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+        sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    background: #f6f8fa;
+    color: #24292f;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+header {
+    margin-bottom: 24px;
+}
+
+header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.subtitle {
+    color: #57606a;
+    margin: 0;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    padding: 24px;
+}
+
+.card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px;
+}
+
+.card p {
+    color: #57606a;
+    margin: 0 0 16px;
+}
+
+.card p code {
+    background: #eef1f3;
+    border-radius: 3px;
+    padding: 1px 4px;
+    font-family:
+        ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.input-row input {
+    flex: 1;
+    padding: 6px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family:
+        ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    background: #f6f8fa;
+    color: #24292f;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.input-row input:focus {
+    outline: none;
+    border-color: #0969da;
+    box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
+    background: #ffffff;
+}
+
+.input-row button {
+    padding: 6px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background: #f6f8fa;
+    color: #24292f;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+.input-row button:hover {
+    background: #eef1f3;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+button {
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid;
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+}
+
+button.primary {
+    background: #1f883d;
+    border-color: #1f883d;
+    color: #ffffff;
+}
+
+button.primary:hover {
+    background: #1a7f37;
+    border-color: #1a7f37;
+}
+
+button.danger {
+    background: #f6f8fa;
+    border-color: #d0d7de;
+    color: #cf222e;
+}
+
+button.danger:hover {
+    background: #fff0ee;
+    border-color: #cf222e;
+}
+
+.status {
+    margin-top: 12px;
+    font-size: 13px;
+    min-height: 20px;
+}
+
+.status.success {
+    color: #1a7f37;
+}
+
+.status.error {
+    color: #cf222e;
+}

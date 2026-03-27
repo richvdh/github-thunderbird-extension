@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "module": "es2022",
+        "moduleResolution": "node",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es2017",
+        "baseUrl": "./",
+        "incremental": true,
+        "skipLibCheck": true,
+        "strictNullChecks": false,
+        "noImplicitAny": false,
+        "strictBindCallApply": false,
+        "forceConsistentCasingInFileNames": false,
+        "noFallthroughCasesInSwitch": false,
+        "esModuleInterop": true,
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "types": [
+            "vite/client",
+            "vitest/globals",
+            "@types/jsdom",
+            "@types/thunderbird-webext-browser"
+        ]
+    },
+    "exclude": ["node_modules", "dist"]
+}
