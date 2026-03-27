@@ -18,7 +18,7 @@ export type GetReviewDataForMessageIdResponse = null | {
     repo: string;
     pullNumber: string;
     reviewId: string;
-    replyMap: Map<number, number>;
+    commentData: Map<number, GetPullCommentResponse>;
 };
 
 /** Fetch a single pull request comment by its ID. */
@@ -33,4 +33,5 @@ export type GetPullCommentRequest = {
 export type GetPullCommentResponse = {
     user: string;
     body_html: string;
+    inReplyToId?: number;
 };

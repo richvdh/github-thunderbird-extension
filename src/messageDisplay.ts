@@ -20,8 +20,8 @@ async function enrichMessage(): Promise<void> {
         });
     if (!reviewData) return; // Not a GitHub review email.
 
-    const { owner, repo, replyMap } = reviewData;
-    if (replyMap.size === 0) return; // No reply comments – nothing to insert.
+    const { owner, repo, commentData } = reviewData;
+    if (commentData.size === 0) return; // No reply comments – nothing to insert.
 
     // Locate comment blocks in the email body.
     const blocks = findCommentBlocksInDom(document);
@@ -29,29 +29,16 @@ async function enrichMessage(): Promise<void> {
 
     // For each comment block that is a reply, fetch the parent and insert it.
     for (const { commentId, preElement } of blocks) {
-        if (!replyMap.has(commentId)) continue;
-
-        const parentId = replyMap.get(commentId);
-
-        let data: GetPullCommentResponse;
-        try {
-            const r = await sendToBackground({
-                action: "getPullComment",
-                owner,
-                repo,
-                commentId: parentId,
-            });
-            data = r.data;
-        } catch (err) {
-            console.error(
-                `[GitHub Review Context] Failed to fetch parent comment ${parentId}:`,
-                err,
+        let parentId = commentData.get(commentId)?.inReplyToId;
+        while (parentId) {
+            const thisCommentData = commentData.get(parentId);
+            if (!thisCommentData) continue;
+            addCommentHtmlToDom(
+                thisCommentData.user,
+                thisCommentData.body_html,
+                preElement,
             );
-            continue;
-        }
-
-        if (data.body_html) {
-            addCommentHtmlToDom(data.user, data.body_html, preElement);
+            parentId = thisCommentData.inReplyToId;
         }
     }
 }
@@ -72,9 +59,9 @@ enrichMessage().catch((err) =>
  * @returns {Promise<any>}
  */
 async function sendToBackground(message: BackgroundRequest) {
-    console.debug("[GitHub Review Context] Sending message:", message);
+    //console.debug("[GitHub Review Context] Sending message:", message);
     const response = await messenger.runtime.sendMessage(message);
-    console.debug("[GitHub Review Context] Received response:", response);
+    //console.debug("[GitHub Review Context] Received response:", response);
     if (response && response.error) {
         throw new Error(response.error);
     }

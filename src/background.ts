@@ -2,17 +2,20 @@
  * Background script for the GitHub Review Context extension.
  *
  * Responsibilities:
+ *   - Register the message display script.
  *   - Expose a helper to retrieve the stored GitHub token.
  *   - Listen for messages from the message-display content script and
- *     proxy GitHub API calls (content scripts cannot set arbitrary headers
- *     directly in all Thunderbird versions, so we centralise fetching here).
+ *     proxy GitHub API calls.
  */
 
 import MessageSender = messenger.runtime.MessageSender;
 
-import { fetchPullComment, fetchReviewComments } from "./utils/github";
+import {
+    fetchPullComment,
+    fetchPullComments,
+    ReviewComment,
+} from "./utils/github";
 import { parseMessageId } from "./utils/parseMessageId";
-import { buildReplyMap } from "@/utils/buildReplyMap";
 import {
     BackgroundRequest,
     GetPullCommentResponse,
@@ -63,19 +66,38 @@ async function handleGetReviewDataForMessageId(
     );
     const parsedMessageId = parseMessageId(message.headerMessageId);
     if (!parsedMessageId) {
+        // Probably not a GitHub review email.
         return null;
     }
-    console.log("[GitHub Review Context] Parsed Message-ID:", parsedMessageId);
+
+    // Data on each review comment
+    const commentData = new Map<number, GetPullCommentResponse>();
+
+    // Most recently seen reply to each comment
+    const commentReplies = new Map<number, number>();
+
+    function commentCallback(comment: ReviewComment) {
+        const commentId = comment.id;
+        const inReplyToId = comment.in_reply_to_id;
+
+        const thisCommentData: GetPullCommentResponse = {
+            body_html: comment.body_html,
+            user: comment.user.login,
+        };
+        commentData.set(commentId, thisCommentData);
+
+        if (inReplyToId) {
+            // If we've previously seen a reply to the same parent, our comment is actually a reply to that reply
+            thisCommentData.inReplyToId =
+                commentReplies.get(inReplyToId) ?? inReplyToId;
+            commentReplies.set(inReplyToId, commentId);
+        }
+    }
 
     // Fetch review comments and build the reply map.
-    const reviewComments = await fetchReviewComments(
-        parsedMessageId,
-        await getToken(),
-    );
-    console.log("[GitHub Review Context] Got review comments:", reviewComments);
-    const replyMap = buildReplyMap(reviewComments);
+    await fetchPullComments(parsedMessageId, await getToken(), commentCallback);
 
-    return { ...parsedMessageId, replyMap };
+    return { ...parsedMessageId, commentData };
 }
 
 async function handleGetPullComment(message: {

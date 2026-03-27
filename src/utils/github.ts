@@ -43,6 +43,49 @@ export async function fetchReviewComments(
 }
 
 /**
+ * Fetch all comments for a pull request
+ * @param reviewDetails - details of the review to fetch
+ * @param token - Optional GitHub personal access token
+ * @returns Array of review comment objects.
+ */
+export async function fetchPullComments(
+    reviewDetails: {
+        owner: string;
+        repo: string;
+        pullNumber: string;
+    },
+    token: string,
+    callback: (comment: ReviewComment) => void,
+): Promise<void> {
+    let url = `${GITHUB_API_BASE}/repos/${reviewDetails.owner}/${reviewDetails.repo}/pulls/${reviewDetails.pullNumber}/comments?per_page=100`;
+
+    while (url) {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: buildHeaders(
+                token,
+                "application/vnd.github-commitcomment.html+json",
+            ),
+        });
+        if (!response.ok) {
+            const body = await response.text().catch(() => "");
+            throw new Error(
+                `GitHub API error ${response.status} for ${url}: ${body}`,
+            );
+        }
+
+        const comments = await response.json();
+
+        if (!(comments instanceof Array)) {
+            throw new Error("GitHub API did not return an array of comments");
+        }
+        comments.forEach(callback);
+
+        url = response.headers.get("link")?.match(/<([^>]+)>; rel="next"/)?.[1];
+    }
+}
+
+/**
  * Fetch a single pull request comment by its ID.
  * @param commentDetails - details of the comment to fetch
  * @param token - Optional GitHub personal access token
