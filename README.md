@@ -24,7 +24,6 @@ never have to switch to the browser to understand the conversation.
 5. Click the gear icon → **Install Add-on From File…**.
 6. Select `github-review-context.xpi`
 
-
 ## Running Tests
 
 ```bash
