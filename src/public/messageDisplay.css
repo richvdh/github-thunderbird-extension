@@ -1,19 +1,17 @@
 .github-review-context-parent {
-    /*background: #f6f8fa;*/
     background: light-dark(#f6f8fa, #090705);
-    /*color: #24292f;*/
     color: light-dark(#24292f, #dbd6d0);
-    /*border-left: 3px solid #d0d7de;*/
     border-left: 3px solid light-dark(#d0d7de, #2f2821);
-    margin: 8px 0 8px 0;
-    padding: 6px 12px;
     border-radius: 0 4px 4px 0;
+    margin: 0.75em 0;
+    /* a very small padding-bottom to prevent margin collapsing from the inner elements */
+    padding: 1ex 1em 0.1px 1em;
     font-size: 0.95em;
 }
 
 .github-review-context-label {
     color: light-dark(#57606a, #a89f95);
-    margin: 0 0 4px 0;
+    margin: 0 0 0.3em 0;
     font-size: 0.8em;
     font-style: italic;
 }
