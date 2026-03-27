@@ -4,6 +4,7 @@ Adds inline parent-comment context to GitHub pull-request review emails inside
 Thunderbird. When you open a review email, any reply comment will have the
 original comment it is replying to inserted directly below the diff, so you
 never have to switch to the browser to understand the conversation.
+
 ---
 
 ## TODO
