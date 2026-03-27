@@ -3,18 +3,21 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    root: "src",
     resolve: {
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
         },
     },
     build: {
+        outDir: "../dist",
+        emptyOutDir: true,
         sourcemap: true,
         // minify: false,
         rolldownOptions: {
             input: {
-                background: "src/background.ts",
-                messageDisplay: "src/messageDisplay.ts",
+                background: "background.ts",
+                messageDisplay: "messageDisplay.ts",
             },
             output: {
                 entryFileNames: "[name].js",
