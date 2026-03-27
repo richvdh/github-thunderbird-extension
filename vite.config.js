@@ -18,6 +18,7 @@ export default defineConfig({
             input: {
                 background: "background.ts",
                 messageDisplay: "messageDisplay.ts",
+                options: "options/options.html",
             },
             output: {
                 entryFileNames: "[name].js",

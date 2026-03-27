@@ -5,73 +5,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>GitHub Review Context – Options</title>
         <link rel="stylesheet" href="options.css" />
+        <script src="options.js" type="module"></script>
     </head>
     <body>
-        <div class="container">
-            <header>
-                <h1>GitHub Review Context</h1>
-                <p class="subtitle">
-                    Configure your GitHub access token for private repositories.
-                </p>
-            </header>
+        <h2>GitHub Personal Access Token</h2>
+        <p>
+            A token is <strong>optional</strong> for public repositories. For
+            private repositories, or to avoid rate limiting, create a classic
+            token with <code>repo</code> permission at
+            <a
+                href="https://github.com/settings/tokens/new"
+                target="_blank"
+                rel="noopener noreferrer"
+                >https://github.com/settings/tokens/new</a
+            >.
+        </p>
 
-            <main>
-                <section class="card">
-                    <h2>GitHub Personal Access Token</h2>
-                    <p>
-                        A token is <strong>optional</strong> for public
-                        repositories. For private repositories, or to avoid rate
-                        limiting, create a fine-grained token with
-                        <code>Pull Requests → Read</code> permission at
-                        <a
-                            href="https://github.com/settings/tokens"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            github.com/settings/tokens </a
-                        >.
-                    </p>
-
-                    <div class="field">
-                        <label for="token">Access Token</label>
-                        <div class="input-row">
-                            <input
-                                type="password"
-                                id="token"
-                                name="token"
-                                placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
-                                autocomplete="off"
-                                spellcheck="false"
-                            />
-                            <button
-                                id="toggleVisibility"
-                                type="button"
-                                aria-label="Toggle token visibility"
-                            >
-                                Show
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="actions">
-                        <button id="save" type="button" class="primary">
-                            Save
-                        </button>
-                        <button id="clear" type="button" class="danger">
-                            Clear Token
-                        </button>
-                    </div>
-
-                    <div
-                        id="status"
-                        class="status"
-                        role="status"
-                        aria-live="polite"
-                    ></div>
-                </section>
-            </main>
+        <div class="field">
+            <label for="token">Access Token</label>
+            <div class="input-row">
+                <input
+                    type="password"
+                    id="token"
+                    name="token"
+                    placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+                    autocomplete="off"
+                    spellcheck="false"
+                />
+                <button
+                    id="toggleVisibility"
+                    type="button"
+                    aria-label="Toggle token visibility"
+                >
+                    Show
+                </button>
+            </div>
         </div>
 
-        <script src="options.js"></script>
+        <div class="actions">
+            <button id="save" type="button" class="primary">Save</button>
+            <button id="clear" type="button" class="danger">Clear Token</button>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
     </body>
 </html>

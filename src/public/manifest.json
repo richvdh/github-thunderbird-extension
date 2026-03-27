@@ -12,7 +12,7 @@
     },
 
     "options_ui": {
-        "page": "src/options/options.html",
+        "page": "options/options.html",
         "open_in_tab": false,
         "browser_style": true
     }
