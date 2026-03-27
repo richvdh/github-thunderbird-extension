@@ -5,12 +5,19 @@ Thunderbird. When you open a review email, any reply comment will have the
 original comment it is replying to inserted directly below the diff, so you
 never have to switch to the browser to understand the conversation.
 
+Before:
+
+![Before screenshot](/doc/screenshot1.png)
+
+After:
+
+![After screenshot](/doc/screenshot2.png)
+
 ---
 
 ## TODO
 
 - Stop `vitest` writing to `src/node_modules`
-- Figure out how to submit the extension to the Thunderbird add-on store
 - Error handling: show an error in the message
 - Show a spinner while fetching
 - Caching: keep a record of results for recent pull requests
