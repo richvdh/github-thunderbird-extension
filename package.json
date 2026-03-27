@@ -4,7 +4,7 @@
     "description": "Thunderbird extension that adds GitHub code review context to emails",
     "type": "module",
     "scripts": {
-        "build": "vite build",
+        "build": "vite build && (cd dist && zip -r ../github-review-context.xpi .)",
         "test": "vitest",
         "lint": "eslint && prettier --check . && tsc --noEmit"
     },

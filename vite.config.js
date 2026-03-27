@@ -13,7 +13,7 @@ export default defineConfig({
         outDir: "../dist",
         emptyOutDir: true,
         sourcemap: true,
-        // minify: false,
+        minify: false,
         rolldownOptions: {
             input: {
                 background: "background.ts",

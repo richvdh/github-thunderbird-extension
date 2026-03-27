@@ -1,7 +1,6 @@
 import { findCommentBlocksInDom } from "./utils/findCommentBlocksInDom";
 import {
     BackgroundRequest,
-    GetPullCommentResponse,
     GetReviewDataForMessageIdResponse,
 } from "@/messageTypes";
 
@@ -20,7 +19,7 @@ async function enrichMessage(): Promise<void> {
         });
     if (!reviewData) return; // Not a GitHub review email.
 
-    const { owner, repo, commentData } = reviewData;
+    const { commentData } = reviewData;
     if (commentData.size === 0) return; // No reply comments – nothing to insert.
 
     // Locate comment blocks in the email body.
@@ -55,10 +54,8 @@ enrichMessage().catch((err) =>
 /**
  * Send a message to the background script and return the response.
  * Throws if the response contains an `error` field.
- * @param {object} message
- * @returns {Promise<any>}
  */
-async function sendToBackground(message: BackgroundRequest) {
+async function sendToBackground(message: BackgroundRequest): Promise<object> {
     //console.debug("[GitHub Review Context] Sending message:", message);
     const response = await messenger.runtime.sendMessage(message);
     //console.debug("[GitHub Review Context] Received response:", response);
@@ -72,7 +69,7 @@ function addCommentHtmlToDom(
     parentCommentUser: string,
     parentCommentHtml: string,
     insertAfter: Element,
-) {
+): void {
     // Create a container for the parent comment and insert it after the <pre>.
     const wrapper = document.createElement("div");
     wrapper.className = "github-review-context-parent";
@@ -82,9 +79,10 @@ function addCommentHtmlToDom(
     label.textContent = `↩ In reply to comment from @${parentCommentUser}:`;
     wrapper.appendChild(label);
 
-    const body = document.createElement("div");
-    body.innerHTML = parentCommentHtml;
-    wrapper.appendChild(body);
+    const replyBodyDiv = document.createElement("div");
+    /* The HTML from the Github API is pre-sanitized, so we don't need to escape it. */
+    replyBodyDiv.innerHTML = parentCommentHtml;
+    wrapper.appendChild(replyBodyDiv);
 
     insertAfter.insertAdjacentElement("afterend", wrapper);
 }

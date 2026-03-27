@@ -4,6 +4,13 @@
     "version": "1.0.0",
     "description": "Adds inline context to GitHub code review emails in Thunderbird",
     "author": "Richard van der Hoff",
+    "homepage_url": "https://github.com/richvdh/github-thunderbird-extension",
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "github-review-context@richvdh.org"
+        }
+    },
 
     "permissions": ["storage", "messagesRead", "messagesModify"],
 
