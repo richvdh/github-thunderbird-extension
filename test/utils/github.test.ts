@@ -11,7 +11,7 @@ describe("buildHeaders", () => {
     test("includes standard GitHub API headers without a token", () => {
         const headers = buildHeaders(null);
         expect(headers["Accept"]).toBe("application/vnd.github+json");
-        expect(headers["X-GitHub-Api-Version"]).toBe("2022-11-28");
+        expect(headers["X-GitHub-Api-Version"]).toBe("2026-03-10");
         expect(headers["Authorization"]).toBeUndefined();
     });
 
