@@ -79,8 +79,7 @@ function addCommentHtmlToDom(
     wrapper.appendChild(label);
 
     const replyBodyDiv = document.createElement("div");
-    /* The HTML from the Github API is pre-sanitized, so we don't need to escape it. */
-    replyBodyDiv.innerHTML = parentCommentHtml;
+    replyBodyDiv.setHTML(parentCommentHtml);
     wrapper.appendChild(replyBodyDiv);
 
     insertAfter.insertAdjacentElement("afterend", wrapper);

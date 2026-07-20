@@ -12,6 +12,7 @@
         "@eslint/js": "^10.0.1",
         "@types/jsdom": "^28.0.1",
         "@types/thunderbird-webext-browser": "^127.0.0",
+        "@typescript/lib-dom": "npm:@types/web@^0.0.353",
         "eslint": "^10.1.0",
         "fetch-mock": "^12.6.0",
         "jsdom": "^29.0.1",

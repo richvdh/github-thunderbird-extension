@@ -24,6 +24,10 @@ After:
 
 ## Installation
 
+Note that this extension requires Thunderbird 148 or newer.
+
+### Build from source
+
 1. Clone or download this repository.
 2. Run `npm install` to install dependencies.
 3. Run `npm run build` to build the extension.

@@ -17,6 +17,9 @@ importers:
       '@types/thunderbird-webext-browser':
         specifier: ^127.0.0
         version: 127.0.0
+      '@typescript/lib-dom':
+        specifier: npm:@types/web@^0.0.353
+        version: '@types/web@0.0.353'
       eslint:
         specifier: ^10.1.0
         version: 10.7.0
@@ -321,6 +324,9 @@ packages:
 
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
+
+  '@types/web@0.0.353':
+    resolution: {integrity: sha512-Oy5oL7g028Z/WdDwQ+qlKwQYQ5kIQd+go3sLykJGIkcFyQlXG8pDGxF03+hEVtox9ueBNIBd1ifvVhKK6hzwog==}
 
   '@typescript-eslint/eslint-plugin@8.64.0':
     resolution: {integrity: sha512-CGvQPBxN3wZLu6Rz2kFUpZeoCm78xUic92ck39KPePkO1NPOwjCqdQnm5Q87tpWw9vcBvW8XLrDXjH9PWYtJ3Q==}
@@ -1256,6 +1262,8 @@ snapshots:
   '@types/thunderbird-webext-browser@127.0.0': {}
 
   '@types/tough-cookie@4.0.5': {}
+
+  '@types/web@0.0.353': {}
 
   '@typescript-eslint/eslint-plugin@8.64.0(@typescript-eslint/parser@8.64.0(eslint@10.7.0)(typescript@5.9.3))(eslint@10.7.0)(typescript@5.9.3)':
     dependencies:

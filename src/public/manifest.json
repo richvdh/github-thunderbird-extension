@@ -8,7 +8,8 @@
 
     "browser_specific_settings": {
         "gecko": {
-            "id": "github-review-context@richvdh.org"
+            "id": "github-review-context@richvdh.org",
+            "strict_min_version": "148.0"
         }
     },
 
