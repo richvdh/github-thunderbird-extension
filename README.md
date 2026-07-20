@@ -34,6 +34,6 @@ After:
 ## Running Tests
 
 ```bash
-npm install
-npm test
+pnpm install
+pnpm test
 ```
