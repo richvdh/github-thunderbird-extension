@@ -13,10 +13,9 @@ import {
  * the GitHub API.
  */
 async function enrichMessage(): Promise<void> {
-    const reviewData: GetReviewDataForMessageIdResponse =
-        await sendToBackground({
-            action: "getReviewDataForMessageId",
-        });
+    const reviewData = (await sendToBackground({
+        action: "getReviewDataForMessageId",
+    })) as GetReviewDataForMessageIdResponse;
     if (!reviewData) return; // Not a GitHub review email.
 
     const { commentData } = reviewData;
