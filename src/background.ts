@@ -36,20 +36,39 @@ messenger.messageDisplayScripts
             console.error("Failed to register message display script:", err),
     );
 
-/*
+/**
  * Handle messages from the message-display script.
  */
 messenger.runtime.onMessage.addListener(
-    async (message: BackgroundRequest, sender: MessageSender) => {
-        if (message.action === "getReviewDataForMessageId") {
-            return await handleGetReviewDataForMessageId(sender);
-        }
-
-        if (message.action === "getPullComment") {
-            return { data: await handleGetPullComment(message) };
-        }
+    (
+        message: BackgroundRequest,
+        sender: MessageSender,
+        sendResponse: (response?: any) => void,
+    ) => {
+        handleMessage(message, sender).then(sendResponse, (error) =>
+            sendResponse({ error: error }),
+        );
+        // Indicate we will send the response asynchronously
+        return true;
     },
 );
+
+async function handleMessage(
+    message: BackgroundRequest,
+    sender: MessageSender,
+): Promise<any> {
+    switch (message.action) {
+        case "getReviewDataForMessageId":
+            return await handleGetReviewDataForMessageId(sender);
+        case "getPullComment":
+            const data = await handleGetPullComment(message);
+            return { data };
+        default:
+            throw new Error(
+                `Unknown message action ${(message as BackgroundRequest).action}`,
+            );
+    }
+}
 
 /**
  * Handle a `getReviewCommentMap` message from the message-display script.
