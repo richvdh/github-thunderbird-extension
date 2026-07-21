@@ -2,3 +2,4 @@
 /node_modules
 /tsconfig.tsbuildinfo
 /github-review-context.xpi
+/src/public/manifest.json

@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "GitHub Review Context",
-    "version": "1.0.0",
+    "version": "Automatically filled out by Vite",
     "description": "Adds inline context to GitHub code review emails in Thunderbird",
     "author": "Richard van der Hoff",
     "homepage_url": "https://github.com/richvdh/github-thunderbird-extension",
