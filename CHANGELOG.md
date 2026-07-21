@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.1.0 - 2026-07-21
+
 ### Internal changes
 
 - Use HTML Sanitizer API to insert markup from Github threads.
