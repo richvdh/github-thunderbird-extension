@@ -1,7 +1,6 @@
 /** The types of request that can be sent to the background script. */
 export type BackgroundRequest =
-    | GetReviewDataForMessageIdRequest
-    | GetPullCommentRequest;
+    GetReviewDataForMessageIdRequest | GetPullCommentRequest;
 
 /**
  * Parse the message-id of the current message, then fetch the review data.
