@@ -43,7 +43,7 @@ messenger.runtime.onMessage.addListener(
     (
         message: BackgroundRequest,
         sender: MessageSender,
-        sendResponse: (response?: any) => void,
+        sendResponse: (response?: object) => void,
     ) => {
         handleMessage(message, sender).then(sendResponse, (error) =>
             sendResponse({ error: error }),
@@ -56,13 +56,12 @@ messenger.runtime.onMessage.addListener(
 async function handleMessage(
     message: BackgroundRequest,
     sender: MessageSender,
-): Promise<any> {
+): Promise<object> {
     switch (message.action) {
         case "getReviewDataForMessageId":
             return await handleGetReviewDataForMessageId(sender);
         case "getPullComment":
-            const data = await handleGetPullComment(message);
-            return { data };
+            return { data: await handleGetPullComment(message) };
         default:
             throw new Error(
                 `Unknown message action ${(message as BackgroundRequest).action}`,
