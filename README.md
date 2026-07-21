@@ -29,8 +29,8 @@ Note that this extension requires Thunderbird 148 or newer.
 ### Build from source
 
 1. Clone or download this repository.
-2. Run `npm install` to install dependencies.
-3. Run `npm run build` to build the extension.
+2. Run `pnpm install` to install dependencies.
+3. Run `pnpm build` to build the extension.
 4. In Thunderbird, open **Tools → Add-on Manager**.
 5. Click the gear icon → **Install Add-on From File…**.
 6. Select `github-review-context.xpi`
