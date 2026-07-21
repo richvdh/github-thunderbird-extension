@@ -26,6 +26,13 @@ After:
 
 Note that this extension requires Thunderbird 148 or newer.
 
+### Install from the Thunderbird Add-ons website
+
+1. Download the latest release from the [releases page](https://addons.thunderbird.net/EN-gb/thunderbird/addon/github-review-context/).
+2. In Thunderbird, open **Tools → Add-on Manager**.
+3. Click the gear icon → **Install Add-on From File…**.
+4. Select the downloaded file.
+
 ### Build from source
 
 1. Clone or download this repository.
@@ -33,7 +40,7 @@ Note that this extension requires Thunderbird 148 or newer.
 3. Run `pnpm build` to build the extension.
 4. In Thunderbird, open **Tools → Add-on Manager**.
 5. Click the gear icon → **Install Add-on From File…**.
-6. Select `github-review-context.xpi`
+6. Select `github-review-context.xpi`.
 
 ## Running Tests
 
