@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Features
+
+- Show a spinner while comment context is being fetched from GitHub.
+  ([866d28f](https://github.com/richvdh/github-thunderbird-extension/commit/866d28f))
+
+### Bug fixes
+
+- Fix bug which could cause message display script to hang.
+  ([63dc534](https://github.com/richvdh/github-thunderbird-extension/commit/63dc534))
+
 ## 1.1.0 - 2026-07-21
 
 ### Internal changes
