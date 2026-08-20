@@ -30,7 +30,7 @@ async function enrichMessage(): Promise<void> {
         let parentId = commentData.get(commentId)?.inReplyToId;
         while (parentId) {
             const thisCommentData = commentData.get(parentId);
-            if (!thisCommentData) continue;
+            if (!thisCommentData) break;
             addCommentHtmlToDom(
                 thisCommentData.user,
                 thisCommentData.body_html,
