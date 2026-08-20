@@ -19,7 +19,6 @@ After:
 
 - Stop `vitest` writing to `src/node_modules`
 - Error handling: show an error in the message
-- Show a spinner while fetching
 - Caching: keep a record of results for recent pull requests
 
 ## Installation

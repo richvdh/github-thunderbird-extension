@@ -13,17 +13,28 @@ import {
  * the GitHub API.
  */
 async function enrichMessage(): Promise<void> {
-    const reviewData = (await sendToBackground({
-        action: "getReviewDataForMessageId",
-    })) as GetReviewDataForMessageIdResponse;
+    // Locate comment blocks in the email body.
+    const blocks = findCommentBlocksInDom(document);
+    if (!blocks.length) return;
+
+    // Show a spinner under each diff while we wait for the GitHub API.
+    const spinners = blocks.map(({ preElement }) =>
+        addSpinnerToDom(preElement),
+    );
+
+    let reviewData: GetReviewDataForMessageIdResponse;
+    try {
+        reviewData = (await sendToBackground({
+            action: "getReviewDataForMessageId",
+        })) as GetReviewDataForMessageIdResponse;
+    } finally {
+        for (const spinner of spinners) spinner.remove();
+    }
+
     if (!reviewData) return; // Not a GitHub review email.
 
     const { commentData } = reviewData;
     if (commentData.size === 0) return; // No reply comments – nothing to insert.
-
-    // Locate comment blocks in the email body.
-    const blocks = findCommentBlocksInDom(document);
-    if (!blocks.length) return;
 
     // For each comment block that is a reply, fetch the parent and insert it.
     for (const { commentId, preElement } of blocks) {
@@ -83,4 +94,29 @@ function addCommentHtmlToDom(
     wrapper.appendChild(replyBodyDiv);
 
     insertAfter.insertAdjacentElement("afterend", wrapper);
+}
+
+/**
+ * Insert a "loading" placeholder after the given element, to show that we are
+ * waiting for data from GitHub.
+ *
+ * @returns the inserted element
+ */
+function addSpinnerToDom(insertAfter: Element): Element {
+    const wrapper = document.createElement("div");
+    wrapper.className =
+        "github-review-context-parent github-review-context-loading";
+    wrapper.setAttribute("role", "status");
+
+    const spinner = document.createElement("div");
+    spinner.className = "github-review-context-spinner";
+    wrapper.appendChild(spinner);
+
+    const label = document.createElement("p");
+    label.className = "github-review-context-label";
+    label.textContent = "Loading comment context…";
+    wrapper.appendChild(label);
+
+    insertAfter.insertAdjacentElement("afterend", wrapper);
+    return wrapper;
 }
