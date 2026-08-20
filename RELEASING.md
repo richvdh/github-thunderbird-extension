@@ -8,12 +8,13 @@
    automatically update `package.json`, commit, then create a tag.
 
 3. Push the changes and tag:
-   ```
-   git push
-   git push --tags
-   ```
 
-   Pushing the tag will trigger a build on Github actions.
+    ```
+    git push
+    git push --tags
+    ```
+
+    Pushing the tag will trigger a build on Github actions.
 
 4. Open the release at
    https://github.com/richvdh/github-thunderbird-extension/releases. Update the
